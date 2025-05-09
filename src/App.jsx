@@ -4,7 +4,7 @@ const initialAvengers = ['IronMan', 'Spiderman', 'Capitan America', 'Hulk', 'Tho
 
 
 function App() {
-
+  // funzione per aggiungere un nuovo elemento nell'array
   const [newAvenger, setNewAvenger] = useState("")
   const [avengers, setAvengers] = useState(initialAvengers)
   const addAvenger = (e) => {
@@ -14,13 +14,28 @@ function App() {
     setAvengers([...avengers, avenger])
     setNewAvenger("")
   }
+
+  const handleRemoveAvenger = (index) => {
+    // funzione per eliminare l'elemento dall'array
+    const updatedAvengers = [...avengers];
+    updatedAvengers.splice(index, 1);
+    setAvengers(updatedAvengers)
+  }
+
   return (
     <>
       <div className="container">
         <h1 className="my-3">Avengers</h1>
         <ul className="list-group mb-4">
           {avengers.map((avenger, index) => (
-            <li key={index} className='list-group-item'>{avenger}</li>
+            <li key={index}
+              className='list-group-item'>
+              {avenger}
+              <button className="btn btn-danger  p-1 mx-5"
+                onClick={() => {
+                  handleRemoveAvenger(index);
+                }}
+              >Elimina</button></li>
           ))}
         </ul>
         <form onSubmit={addAvenger} >
@@ -30,7 +45,9 @@ function App() {
               placeholder='Inserisci il tuo Avengers'
               value={newAvenger}
               onChange={(e) => setNewAvenger(e.target.value)} />
-            <button className="btn btn-primary">Aggiungi</button>
+            <div className="btn-input">
+              <button className="btn btn-primary mx-3">Aggiungi</button>
+            </div>
           </div>
         </form>
       </div>
