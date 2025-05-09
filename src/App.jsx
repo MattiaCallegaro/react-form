@@ -1,6 +1,6 @@
 import { use, useState } from 'react'
 
-const avengers = ['IronMan', 'Spiderman', 'Capitan America', 'Hulk', 'Thor', 'Black Widow']
+const initialAvengers = ['IronMan', 'Spiderman', 'Capitan America', 'Hulk', 'Thor', 'Black Widow']
 
 
 function App() {
@@ -23,11 +23,13 @@ function App() {
             <li key={index} className='list-group-item'>{avenger}</li>
           ))}
         </ul>
-        <form >
+        <form onSubmit={addAvenger} >
           <div className="input-group mb-3">
             <input type="text"
               className='form-control'
-              placeholder='Inserisci il tuo Avengers' />
+              placeholder='Inserisci il tuo Avengers'
+              value={newAvenger}
+              onChange={(e) => setNewAvenger(e.target.value)} />
             <button className="btn btn-primary">Aggiungi</button>
           </div>
         </form>
