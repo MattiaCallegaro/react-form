@@ -1,9 +1,19 @@
-import { useState } from 'react'
+import { use, useState } from 'react'
 
 const avengers = ['IronMan', 'Spiderman', 'Capitan America', 'Hulk', 'Thor', 'Black Widow']
 
 
 function App() {
+
+  const [newAvenger, setNewAvenger] = useState("")
+  const [avengers, setAvengers] = useState(initialAvengers)
+  const addAvenger = (e) => {
+    e.preventDefault();
+    //con trim andiamo a spalmare nell'array
+    const avenger = newAvenger.trim()
+    setAvengers([...avengers, avenger])
+    setNewAvenger("")
+  }
   return (
     <>
       <div className="container">
@@ -18,6 +28,7 @@ function App() {
             <input type="text"
               className='form-control'
               placeholder='Inserisci il tuo Avengers' />
+            <button className="btn btn-primary">Aggiungi</button>
           </div>
         </form>
       </div>
